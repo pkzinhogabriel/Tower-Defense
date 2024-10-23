@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6458838690121565601}
   - component: {fileID: 7483463767343254987}
+  - component: {fileID: 6419115009782995272}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.391165, y: 0.943132, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,3 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6419115009782995272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059042359612664021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d25c9a6186a64e4ba0cb4a8f2715d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetingRange: 5
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
