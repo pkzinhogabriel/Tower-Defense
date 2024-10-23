@@ -5,15 +5,16 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-    [SerializeField] private GameObject[] towerPrefabs;
+   
+    [SerializeField] private Tower[] towers;
     private int selectedTower;
     private void Awake()
     {
         instance = this;
     }
-    public GameObject GetSelectedTower()
+    public Tower GetSelectedTower()
     {
-        return towerPrefabs[selectedTower];
+        return towers[selectedTower];
     }
     // Start is called before the first frame update
     void Start()
