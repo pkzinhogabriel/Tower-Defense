@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7483463767343254987}
   - component: {fileID: 6419115009782995272}
   m_Layer: 0
-  m_Name: Test Turret
+  m_Name: Fire Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.75477, g: 0.83137256, b: 0.13725488, a: 1}
+  m_Color: {r: 1, g: 0.046096165, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,13 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d25c9a6186a64e4ba0cb4a8f2715d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 10
+  targetingRange: 5
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
   bulletPrefab: {fileID: 4861451758258170669, guid: de97d89a78262824ea1bea10211769e6, type: 3}
   firingPoint: {fileID: 211147248100111750}
-  bps: 0.5
+  bps: 1
 --- !u!1 &2709747414101283546
 GameObject:
   m_ObjectHideFlags: 0
