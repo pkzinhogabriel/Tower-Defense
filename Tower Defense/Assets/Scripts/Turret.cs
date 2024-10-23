@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] protected float targetingRange = 5f;
-    [SerializeField] protected LayerMask enemyMask;
-    [SerializeField] protected GameObject bulletPrefab;
-    [SerializeField] protected Transform firingPoint;
-    [SerializeField] protected float bps = 1f;
-    protected Transform target;
-    protected float timeUntilFire;
+    [SerializeField] private float targetingRange = 5f;
+    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firingPoint;
+    [SerializeField] private float bps = 1f;
+    private Transform target;
+    private float timeUntilFire;
     
 
     // Update is called once per frame
-   protected virtual void Update()
+   private void Update()
     {
         if (target == null)
         {
@@ -25,32 +25,29 @@ public class Turret : MonoBehaviour
         if (!CheckTargetIsInRange())
         {
             target = null;
-            return;
         } 
-       
-        
+       else
+        {
             timeUntilFire += Time.deltaTime;
             if (timeUntilFire >= 1f / bps)
             {
                 Shoot();
                 timeUntilFire = 0f;
             }
-        
+        }
         
     }
-    protected virtual void Shoot()
+    private void Shoot()
     {
-        if (bulletPrefab == null || firingPoint == null) return;
-
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        GameObject bulletObj = Instantiate(bulletPrefab,firingPoint.position,Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
     }
-    protected bool CheckTargetIsInRange()
+    private bool CheckTargetIsInRange()
     {
-        return target != null && Vector2.Distance(target.position, transform.position) <= targetingRange;
+        return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
-    protected void FindTarget()
+    private void FindTarget()
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)transform.position, 0f, enemyMask);
         if (hits.Length > 0)
