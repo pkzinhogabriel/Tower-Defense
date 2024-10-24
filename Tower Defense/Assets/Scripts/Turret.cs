@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour, Iatacavel
 {
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] protected float targetingRange = 5f;
+    [SerializeField] protected LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private float bps = 1f;
     private Transform target;
-    private float timeUntilFire;
+    protected float timeUntilFire;
     
 
     public void Atacar()

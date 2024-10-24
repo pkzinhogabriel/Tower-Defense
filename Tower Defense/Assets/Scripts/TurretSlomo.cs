@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class TurretSlomo : MonoBehaviour
+public class TurretSlomo : Turret
 {
-    [SerializeField] private LayerMask enemyMask;
-    [SerializeField] private float targetingRange = 5f;
+    
     [SerializeField] private float aps = 4f;
     [SerializeField] private float FreezeTime = 1f;
-    private float timeUntilFire;
+    
     // Start is called before the first frame update
     private void Update()
     {

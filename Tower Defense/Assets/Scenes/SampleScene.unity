@@ -9592,7 +9592,7 @@ MonoBehaviour:
     prefab: {fileID: 1059042359612664021, guid: 1c13bc8d941bc4647af6f9f38fde25af, type: 3}
   - name: Slowmo Turret
     cost: 0
-    prefab: {fileID: 1059042359612664021, guid: 8533a894764b0654ca3755593ad0058c, type: 3}
+    prefab: {fileID: 1059042359612664021, guid: b9558aa8d4f96fe43ac3af859f39d628, type: 3}
   - name: Fire Turret
     cost: 0
     prefab: {fileID: 1059042359612664021, guid: f8bd6ff3258471c4b91cdc904a9031c0, type: 3}
