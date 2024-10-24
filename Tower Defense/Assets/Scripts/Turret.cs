@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviour, Iatacavel
 {
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private LayerMask enemyMask;
@@ -14,13 +14,17 @@ public class Turret : MonoBehaviour
     private float timeUntilFire;
     
 
+    public void Atacar()
+    {
+
+    }
     // Update is called once per frame
    private void Update()
     {
         if (target == null)
         {
             FindTarget();
-            return;
+            return; 
         }
         if (!CheckTargetIsInRange())
         {
