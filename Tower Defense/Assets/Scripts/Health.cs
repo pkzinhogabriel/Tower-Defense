@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int hitPoints = 2;
+    [SerializeField] private float hitPoints = 2;
     private bool isDestroyed = false;
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         hitPoints -= dmg;
         if (hitPoints <= 0 && !isDestroyed)

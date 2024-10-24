@@ -5,7 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class TurretSlomo : Turret
 {
-    
+        
     [SerializeField] private float aps = 4f;
     [SerializeField] private float FreezeTime = 1f;
     

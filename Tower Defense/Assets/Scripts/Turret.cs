@@ -7,14 +7,14 @@ public class Turret : MonoBehaviour, Iatacavel
 {
     [SerializeField] protected float targetingRange = 5f;
     [SerializeField] protected LayerMask enemyMask;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform firingPoint;
+    [SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] protected Transform firingPoint;
     [SerializeField] private float bps = 1f;
-    private Transform target;
+    protected Transform target;
     protected float timeUntilFire;
     
 
-    public void Atacar()
+    public virtual void Atacar()
     {
 
     }
@@ -41,7 +41,7 @@ public class Turret : MonoBehaviour, Iatacavel
         }
         
     }
-    private void Shoot()
+    protected virtual void Shoot()
     {
         GameObject bulletObj = Instantiate(bulletPrefab,firingPoint.position,Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
