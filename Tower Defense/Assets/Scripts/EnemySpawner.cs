@@ -6,78 +6,100 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour // Classe EnemySpawner: Responsável por gerar inimigos em ondas no jogo.
+
 {
-    [SerializeField] private GameObject[] enemyPrefabs;
-    [SerializeField] private int baseEnemies = 8;
-    [SerializeField] private float enemiesPerSecond = 0.5f;
-    [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float difficultyScalingFactor = 0.75f;
-    [SerializeField] private float enemiesPerSecondCap = 15f;
+    [SerializeField] private GameObject[] enemyPrefabs;    // Prefabs dos inimigos que podem ser gerados.
 
-    public static UnityEvent onEnemyDestroy = new UnityEvent();
+    [SerializeField] private int baseEnemies = 8;    // Número base de inimigos por onda.
 
-    private int currentWave = 1;
-    private float timeSinceLastSpawn;
-    private int enemiesAlive;
-    private int enemiesLeftToSpawn;
-    private float eps;
-    private bool isSpawning = false;
-    private void Awake()
+    [SerializeField] private float enemiesPerSecond = 0.5f;    // Número de inimigos gerados por segundo.
+
+    [SerializeField] private float timeBetweenWaves = 5f;    // Tempo entre ondas de inimigos.
+
+    [SerializeField] private float difficultyScalingFactor = 0.75f;    // Fator de escalonamento de dificuldade por onda.
+
+    [SerializeField] private float enemiesPerSecondCap = 15f;    // Limite máximo de inimigos gerados por segundo.
+
+
+    public static UnityEvent onEnemyDestroy = new UnityEvent();    // Evento que é acionado quando um inimigo é destruído.
+
+    // Variáveis internas para gerenciar o estado do spawner.
+
+    private int currentWave = 1;// Onda atual.
+    private float timeSinceLastSpawn; // Tempo desde o último inimigo gerado.
+    private int enemiesAlive; // Número de Inimigos vivos
+    private int enemiesLeftToSpawn; // Número de inimigos restantes a serem gerados.
+    private float eps; // Inimigos por segundo (enemies per second).
+    private bool isSpawning = false; // Indica se os inimigos estão sendo gerados.
+    private void Awake()     // Método chamado quando o objeto é inicializado.
+
     {
-        onEnemyDestroy.AddListener(EnemyDestroyed);
+        onEnemyDestroy.AddListener(EnemyDestroyed); // Adiciona o listener para o evento de destruição de inimigos.
     }
-    private void Start()
+    private void Start()     // Método chamado no início do jogo.
+
     {
-        StartCoroutine(StartWave());
+        StartCoroutine(StartWave()); // Inicia a primeira onda de inimigos.
     }
-    private void Update()
+    private void Update()     // Método chamado a cada quadro.
+
     {
-        if (!isSpawning) return;
-        timeSinceLastSpawn += Time.deltaTime;
-        if (timeSinceLastSpawn >= (1f / eps) && enemiesLeftToSpawn > 0)
+        if (!isSpawning) return;         // Se não estiver gerando inimigos, sai do método.
+
+        timeSinceLastSpawn += Time.deltaTime;        // Atualiza o tempo desde o último inimigo gerado.
+
+        if (timeSinceLastSpawn >= (1f / eps) && enemiesLeftToSpawn > 0)        // Verifica se é hora de gerar um novo inimigo.
+
         {
-            SpawnEnemy();
-            enemiesLeftToSpawn--;
-            enemiesAlive++;
-            timeSinceLastSpawn = 0f;
+            SpawnEnemy(); // Gera um inimigo.
+            enemiesLeftToSpawn--; // Decrementa o número de inimigos restantes a serem gerados.
+            enemiesAlive++; // Incrementa o número de inimigos vivos.
+            timeSinceLastSpawn = 0f; // Reseta o temporizador.
         }
-        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)
+        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)         // Verifica se todos os inimigos foram destruídos.
+
         {
-            EndWave();
+            EndWave(); // Termina a onda atual.
         }
     }
-    private void EnemyDestroyed()
+    private void EnemyDestroyed()     // Método chamado quando um inimigo é destruído.
+
     {
-        enemiesAlive--;
+        enemiesAlive--; // Decrementa o número de inimigos vivos.
     }
-    private IEnumerator StartWave()
+    private IEnumerator StartWave()     //   inicia uma nova onda de inimigos.
+
     {
-        yield return new WaitForSeconds(timeBetweenWaves);
-        isSpawning = true;
-        enemiesLeftToSpawn = EnemiesPerWave();
-        eps = EnemiesPerSecond();
+        yield return new WaitForSeconds(timeBetweenWaves);// Espera pelo tempo entre ondas.
+        isSpawning = true; // Marca que os inimigos estão sendo gerados.
+        enemiesLeftToSpawn = EnemiesPerWave(); // Calcula quantos inimigos serão gerados nesta onda.
+        eps = EnemiesPerSecond(); // Calcula a taxa de geração de inimigos por segundo.
     }
-    private void EndWave()
+    private void EndWave()     // Método para terminar a onda atual e iniciar uma nova.
+
     {
-        isSpawning = false;
-        timeSinceLastSpawn = 0f;
-        currentWave++;
-        StartCoroutine(StartWave());
+        isSpawning = false; // Para a geração de inimigos.
+        timeSinceLastSpawn = 0f; // Reseta o temporizador de geração.
+        currentWave++; // Avança para a próxima onda.
+        StartCoroutine(StartWave()); // Inicia a próxima onda.
     }
-    private void SpawnEnemy()
+    private void SpawnEnemy()     // Método para gerar um inimigo.
+
     {
-        int index = Random.Range(0, enemyPrefabs.Length);
-        GameObject prefabToSpawn = enemyPrefabs[index];
-        Instantiate(prefabToSpawn, LevelManager.instance.startPoint.position, Quaternion.identity);
+        int index = Random.Range(0, enemyPrefabs.Length); // Seleciona um prefab aleatório de inimigo.
+        GameObject prefabToSpawn = enemyPrefabs[index]; // Obtém o prefab escolhido.
+        Instantiate(prefabToSpawn, LevelManager.instance.startPoint.position, Quaternion.identity); // Instancia o inimigo na posição inicial.
     }
-    private int EnemiesPerWave()
+    private int EnemiesPerWave()     // Método para calcular o número de inimigos por onda.
+
     {
-        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
+        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor)); // Aplica a escala de dificuldade.
     }
-    private float EnemiesPerSecond()
+    private float EnemiesPerSecond()     // Método para calcular a taxa de inimigos gerados por segundo.
+
     {
-        return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor), 0f,enemiesPerSecondCap);
+        return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor), 0f,enemiesPerSecondCap); // Aplica limite máximo.
     }
 
 

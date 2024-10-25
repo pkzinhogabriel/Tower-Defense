@@ -2,36 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plot : MonoBehaviour
+public class Plot : MonoBehaviour // Classe Plot: Representa uma área onde torres podem ser construídas no jogo.
+
 {
-    [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private Color hoverColor;
-    private GameObject tower;
-    private Color startColor;
-    // Start is called before the first frame update
-  private void Start()
+    [SerializeField] private SpriteRenderer sr;    // Componente SpriteRenderer usado para mudar a aparência do plot.
+
+    [SerializeField] private Color hoverColor;    // Cor que será aplicada quando o mouse passar sobre o plot.
+
+    private GameObject tower;    // Referência ao objeto da torre construída neste plot.
+
+    private Color startColor;    // Cor inicial do plot.
+
+    // Método chamado ao iniciar o jogo. Inicializa a cor inicial do plot.
+    private void Start()
     {
-        startColor = sr.color;
+        startColor = sr.color;// Armazena a cor inicial do SpriteRenderer.
     }
-    private void OnMouseEnter()
+    private void OnMouseEnter()    // Método chamado quando o mouse entra na área do plot.
+
     {
-        sr.color = hoverColor; 
+        sr.color = hoverColor; // Muda a cor do plot para a cor de hover.
     }
-    private void OnMouseExit()
+    private void OnMouseExit()    // Método chamado quando o mouse sai da área do plot.
+
     {
-        sr.color = startColor;
+        sr.color = startColor;// Restaura a cor inicial do plot.
     }
-    private void OnMouseDown()
+    private void OnMouseDown()    // Método chamado quando o mouse clica no plot.
+
     {
-        if (tower != null) return;
-        
-        Tower towerToBuild = BuildManager.instance.GetSelectedTower();
-        tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
-        
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (tower != null) return;        // Se já houver uma torre construída, não faz nada.
+
+
+        Tower towerToBuild = BuildManager.instance.GetSelectedTower();        // Obtém a torre selecionada do BuildManager.
+
+        tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);        // Instancia a torre na posição do plot.
+
+
     }
 }
