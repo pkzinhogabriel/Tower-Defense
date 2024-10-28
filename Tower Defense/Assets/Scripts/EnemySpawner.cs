@@ -61,6 +61,7 @@ public class EnemySpawner : MonoBehaviour // Classe EnemySpawner: Responsável po
 
         {
             EndWave(); // Termina a onda atual.
+            baseEnemies++; // incrementa a quantidade máxima de inimigos 
         }
     }
     private void EnemyDestroyed()     // Método chamado quando um inimigo é destruído.

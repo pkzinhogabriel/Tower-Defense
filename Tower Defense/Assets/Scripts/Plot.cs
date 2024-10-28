@@ -40,7 +40,7 @@ public class Plot : MonoBehaviour // Classe Plot: Representa uma área onde torre
             Debug.Log("Você é pobre");
             return;
         }
-        LevelManager.instance.SpendCurrency(towerToBuild.cost); 
+        LevelManager.instance.SpendCurrency(towerToBuild.cost);
         tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);        // Instancia a torre na posição do plot.
 
 
