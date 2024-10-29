@@ -24,19 +24,19 @@ public class LevelManager : MonoBehaviour // Classe LevelManager: Gerencia infor
     }
     public void IncreaseCurrency(int amount) // Metodo que aumenta as Moedinhas
     {
-        currency += amount;
+        currency += amount; // moeda maior ou igual a quantidade
     }
-    public bool SpendCurrency(int amount)
+    public bool SpendCurrency(int amount) // Gastar o dinheiro
     {
-        if (amount <= currency)
+        if (amount <= currency) // se a quantidade é menor ou igual a moeda
         {
-            currency -= amount;
-            return true;
+            currency -= amount; // moeda  menor ou igual a quantidade
+            return true; // retorna verdadeiro
         }
         else
         {
-            Debug.Log("Pobre você é");
-            return false;        
+            Debug.Log("Pobre você é"); // mostra no console a linda mensagem escrita 
+            return false;    //retorna falso    
         }
     }
 }
